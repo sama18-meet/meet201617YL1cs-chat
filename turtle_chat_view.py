@@ -1,6 +1,6 @@
 #2016-2017 PERSONAL PROJECTS: TurtleChat!
 #Sama Mazzawi
-
+#### 2ce412f1d3fc
 #####################################################################################
 #                                   IMPORTS                                         #
 #####################################################################################
@@ -32,7 +32,11 @@ class TextBox(TextInput):
 
 
     def write_msg(self):
-        #Use the write  methood and new_msg
+        msg = self.new_msg
+        self.writer.goto(self.pos)
+        
+        
+        
         
         '''
         Method to write the message to the screen after every
