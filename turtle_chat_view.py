@@ -19,6 +19,33 @@ from turtle_chat_widgets import Button , TextInput
 #Make a class called TextBox, which will be a subclass of TextInput.
 #Because TextInput is an abstract class, you must implement its abstract
 class TextBox(TextInput):
+    def draw_box(self):
+        turtle.penup()
+        turtle.goto(self.pos-width/2,self.pos-height/2)
+        turtle.pendown()
+        turtle.goto(self.pos-width/2,self.pos+height/2)
+        turtle.goto(self.pos+width/2,self.pos+height/2)
+        turtle.goto(self.pos+width/2,self.pos-height/2)
+        turtle.goto(self.pos-width/2,self.pos-height/2)
+        turtle.penup()
+       
+
+
+    def write_msg(self):
+        #Use the write  methood and new_msg
+        
+        '''
+        Method to write the message to the screen after every
+        keypress.  Abstract method; must be implemented in
+        concrete classes.
+
+        Opportunity, also, to clean strings - add in newlines,
+        '\r', for example, when needed, etc.
+
+        Side effect method - no inputs or outputs, but
+        new_msg may be changed.
+        '''
+        pass
 #methods.  There are two:
 #
 #draw_box
@@ -28,7 +55,7 @@ class TextBox(TextInput):
 #1. in draw_box, you will draw (or stamp) the space on which the user's input
 #will appear.
     def draw_box(self):
-        box= turtle.clone(
+        box= turtle.clone()
 #
 #2. All TextInput objects have an internal turtle called writer (i.e. self will
 #   have something called writer).  You can write new text with it using code like
@@ -129,16 +156,21 @@ class View:
         ###
 
     def send_msg(self):
+        Client.send()
+        self.msg_queue()
+        clear_msg()
+        self.display_msg()
         '''
-        You should implement this method.  It should call the
-        send() method of the Client object stored in this View
-        instance.  It should also update the list of messages,
-        self.msg_queue, to include this message.  It should
+        You should implement this method.  It should
+        1. call the send() method of the Client object stored in this View
+        instance.
+        2. It should also update the list of messages,
+        self.msg_queue, to include this message.
+        3. It should
         clear the textbox text display (hint: use the clear_msg method).
-        It should call self.display_msg() to cause the message
+        4. It should call self.display_msg() to cause the message
         display to be updated.
         '''
-        pass
 
     def get_msg(self):
         return self.textbox.get_msg()
