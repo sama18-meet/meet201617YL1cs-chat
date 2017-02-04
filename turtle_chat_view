@@ -1,26 +1,11 @@
-#2016-2017 PERSONAL PROJECTS: TurtleChat!
-#Sama Mazzawi
-#### 2ce412f1d3fc
-####aba2062880000
-#####################################################################################
-#                                   IMPORTS                                         #
-#####################################################################################
-#import the turtle module
+
 import turtle
-#import the Client class from the turtle_chat_client module
+turtle.hideturtle()
 from turtle_chat_client import Client
-#Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
-from turtle_chat_widgets import Button , TextInput
-#####################################################################################
-#####################################################################################
+from turtle_chat_widgets import TextInput# , Button
 
-#####################################################################################
-#                                   TextBox                                         #
-#####################################################################################
-#Make a class called TextBox, which will be a subclass of TextInput.
-#Because TextInput is an abstract class, you must implement its abstract
+
 class TextBox(TextInput):
-
     def draw_box(self):
         box = turtle.clone()
         #box.hideturtle()
@@ -32,35 +17,18 @@ class TextBox(TextInput):
         box.goto(self.pos[0]+self.width/2,self.pos[1]-self.height/2)
         box.goto(self.pos[0]-self.width/2,self.pos[1]-self.height/2)
         box.penup()
+
      
 
 
     def write_msg(self):
+        #self.writer.goto(self.pos-width/2+5,self.pos+height/2)
+        self.writer.pendown()
+        self.writer.clear()
         self.writer.write(self.new_msg)
         
         
-        '''
-        Method to write the message to the screen after every
-        keypress.  Abstract method; must be implemented in
-        concrete classes.
 
-        Opportunity, also, to clean strings - add in newlines,
-        '\r', for example, when needed, etc.
-
-        Side effect method - no inputs or outputs, but
-        new_msg may be changed.
-        '''
-        
-#methods.  There are two:
-#
-#draw_box
-#write_msg
-#
-#Hints:
-#1. in draw_box, you will draw (or stamp) the space on which the user's input
-#will appear.
-    def draw_box(self):
-        box= turtle.clone()
 #
 #2. All TextInput objects have an internal turtle called writer (i.e. self will
 #   have something called writer).  You can write new text with it using code like
@@ -83,7 +51,7 @@ class TextBox(TextInput):
 class SendButton(Button):
 ## NOT CHECKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def __init__(self,my_view):
-        super(SendButton,self).__init__(my_view)
+        super(SendButton,self).__init__(view)
     def fun(self,x=None,y=None):
       
         self.my_view.send_msg()
@@ -268,3 +236,6 @@ if __name__ == '__main__':
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
     turtle.mainloop()
+
+
+

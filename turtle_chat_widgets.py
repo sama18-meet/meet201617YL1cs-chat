@@ -607,3 +607,6 @@ class TextInput(metaclass=ABCMeta):
         self.new_msg+='9'
         self.write_msg()
         print(self.new_msg)
+    def add_return(self):
+        self.writer.goto(-self.width/2+10+self.pos[0],self.pos[1]-self.height/2+20+10)
+        self.write_msg()
