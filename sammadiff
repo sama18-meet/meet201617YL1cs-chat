@@ -1,0 +1,63 @@
+1,8c1
+< #2016-2017 PERSONAL PROJECTS: TurtleChat!
+< #Sama Mazzawi
+< #### 2ce412f1d3fc
+< ####aba2062880000
+< #####################################################################################
+< #                                   IMPORTS                                         #
+< #####################################################################################
+< #import the turtle module
+---
+> 
+10c3
+< #import the Client class from the turtle_chat_client module
+---
+> turtle.hideturtle()
+12d4
+< #Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
+14,15d5
+< #####################################################################################
+< #####################################################################################
+17,22d6
+< #####################################################################################
+< #                                   TextBox                                         #
+< #####################################################################################
+< #Make a class called TextBox, which will be a subclass of TextInput.
+< #Because TextInput is an abstract class, you must implement its abstract
+< class TextBox(TextInput):
+23a8
+> class TextBox(TextInput):
+34a20
+> 
+39c25
+<         
+---
+>         #self.writer.goto(self.pos-width/2+5,self.pos+height/2)
+44,54d29
+<         '''
+<         Method to write the message to the screen after every
+<         keypress.  Abstract method; must be implemented in
+<         concrete classes.
+< 
+<         Opportunity, also, to clean strings - add in newlines,
+<         '\r', for example, when needed, etc.
+< 
+<         Side effect method - no inputs or outputs, but
+<         new_msg may be changed.
+<         '''
+56,65c31
+< #methods.  There are two:
+< #
+< #draw_box
+< #write_msg
+< #
+< #Hints:
+< #1. in draw_box, you will draw (or stamp) the space on which the user's input
+< #will appear.
+<     def draw_box(self):
+<         box= turtle.clone()
+---
+> 
+272a239,240
+> 
+> 

@@ -50,14 +50,16 @@ class TextBox(TextInput):
 #Make a class called SendButton, which will be a subclass of Button.
 class SendButton(Button):
 ## NOT CHECKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def __init__(self,my_view):
-        super(SendButton,self).__init__(view)
+    '''def __init__(self,my_view):
+        super(SendButton,self).__init__(my_view)'''
     def fun(self,x=None,y=None):
-      
-        self.my_view.send_msg()
-        self.get_msg()
-        self.msg_recieved()
-        self.display_msg()
+ 
+        print("I am inside SendButtom.fun() x=", x, " y=",y)
+        
+        #self.my_view.send_msg()
+        #self.get_msg()
+        #self.msg_recieved()
+        #self.display_msg()
         
         '''
         Abstract method whose implementation is called when
@@ -68,7 +70,7 @@ class SendButton(Button):
         :param y: integer, vertical coordinate of click in pixels (required for onclick)
                   Default=None
         '''
-        pass
+        #pass
 
     
 #Button is an abstract class with one abstract method: fun.

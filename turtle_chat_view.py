@@ -10,7 +10,7 @@ import turtle
 #import the Client class from the turtle_chat_client module
 from turtle_chat_client import Client
 #Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
-from turtle_chat_widgets import Button , TextInput
+from turtle_chat_widgets import TextInput# , Button
 #####################################################################################
 #####################################################################################
 
@@ -36,8 +36,10 @@ class TextBox(TextInput):
 
 
     def write_msg(self):
-        self.writer.write(self.new_msg)
         
+        self.writer.pendown()
+        self.writer.clear()
+        self.writer.write(self.new_msg)
         
         '''
         Method to write the message to the screen after every

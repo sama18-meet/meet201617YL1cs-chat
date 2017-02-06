@@ -21,8 +21,9 @@ class Button(metaclass=ABCMeta):
                     turtle.shape('square'); turtle.shapesize(2,10)
         :param pos: tuple input, (x,y), specifying the location of the
                     turtle object.
+
         '''
-        print('test')
+        print('test: Button.__init__ was called')
         if my_turtle is None :
             #If no turtle given, create new one
             self.turtle=turtle.clone()
@@ -41,6 +42,7 @@ class Button(metaclass=ABCMeta):
             turtle.addshape(shape)
             self.turtle.shape(shape)
         self.turtle.showturtle()
+        print("I am here before: Link listener to button function")
         self.turtle.onclick(self.fun) #Link listener to button function
         turtle.listen() #Start listener
 
