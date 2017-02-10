@@ -2,7 +2,7 @@
 import turtle
 turtle.hideturtle()
 from turtle_chat_client import Client
-from turtle_chat_widgets import TextInput# , Button
+from turtle_chat_widgets import TextInput , Button
 
 
 class TextBox(TextInput):
@@ -22,7 +22,7 @@ class TextBox(TextInput):
 
 
     def write_msg(self):
-        #self.writer.goto(self.pos-width/2+5,self.pos+height/2)
+        
         self.writer.pendown()
         self.writer.clear()
         self.writer.write(self.new_msg)
@@ -49,28 +49,16 @@ class TextBox(TextInput):
 #####################################################################################
 #Make a class called SendButton, which will be a subclass of Button.
 class SendButton(Button):
-## NOT CHECKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    '''def __init__(self,my_view):
-        super(SendButton,self).__init__(my_view)'''
+    def __init__(self,my_view):
+        super(SendButton,self).__init__()
+        self.my_view = my_view
     def fun(self,x=None,y=None):
  
-        print("I am inside SendButtom.fun() x=", x, " y=",y)
-        
-        #self.my_view.send_msg()
-        #self.get_msg()
-        #self.msg_recieved()
-        #self.display_msg()
-        
-        '''
-        Abstract method whose implementation is called when
-        button gets pressed.  Must be implemented in concrete subclasses.
 
-        :param x: integer, horizontal coordinate of click in pixels (required for onclick)
-                  Default=None
-        :param y: integer, vertical coordinate of click in pixels (required for onclick)
-                  Default=None
-        '''
-        #pass
+        
+        self.my_view.send_msg()
+      
+        
 
     
 #Button is an abstract class with one abstract method: fun.
@@ -111,12 +99,14 @@ class View:
         ###
         #Store the username and partner_name into the instance.
         ###
-
+        self.username = username
+        self.partner_name = partner_name
         ###
         #Make a new client object and store it in this instance of View
         #(i.e. self).  The name of the instance should be my_client
         ###
         my_client = Client()
+        self.my_client = my_client
         ###
         #Set screen dimensions using turtle.setup
         #You can get help on this function, as with other turtle functions,
@@ -127,7 +117,7 @@ class View:
         #
         #at the Python shell.
         ###
-        turtle.setup(width=View._SCREEN_WIDTH,height=View._SCREEN_HEIGHT)
+        turtle.setup(width=View._SCREEN_WIDTH,height=View._SCREEN_HEIGHT) # View.
         ###
         #This list will store all of the messages.
         #You can add strings to the front of the list using
@@ -139,25 +129,57 @@ class View:
 
         ###
         #Create one turtle object for each message to display.
-        #You can use the clear() and write() methods to erase
+        #You can use the clear() and write() methods to erase      ???????????????????????/
         #and write messages for each
         ###
         
-        ###
+    #Maybe I should define msg_queue_displayed
+     #   for i in range(2):
+##            self.msg_queue_displayed = [self.msg_queue[-1], self.msg_queue[2]]
+        mqd0 = turtle.clone()
+        mqd1 = turtle.clone()
+        self.mqd0 = mqd0
+        self.mqd1 = mqd1
+        self.mqd0.penup()
+        self.mqd1.penup()
+        self.mqd0.goto(-100,50)
+        self.mqd1.goto(-100,150)
+        self.mqd0.pendown()
+        self.mqd1.pendown()
+            
+            
+
+##            
+##        msg1 = turtle.clone()
+##        msg2 = turtle.clone()
+##        msg3 = turtle.clone()
+##        msg4 = turtle.clone()
+##        msg5 = turtle.clone()
+##        self.msg1 = msg1
+##        self.msg2 = msg2
+##        self.msg3 = msg3
+##        self.msg4 = msg4
+##        self.msg5 = msg5
+##        ###
         #Create a TextBox instance and a SendButton instance and
         #Store them inside of this instance
         ###
-        ss = TextBox()
-        aa = SendButton(self)
+        self.textbox = TextBox()
+        self.sendbutton = SendButton(self)
         ###
         #Call your setup_listeners() function, if you have one,
         #and any other remaining setup functions you have invented.
         ###
+        turtle.listen()
+        
 
+
+
+        
     def send_msg(self):
-        my_client.send()
-        self.msg_queue()
-        clear_msg()
+        self.my_client.send(self.textbox.new_msg)
+        self.msg_queue.append(self.textbox.new_msg)
+        self.textbox.clear_msg()
         self.display_msg()
         '''
         You should implement this method.  It should
@@ -187,6 +209,7 @@ class View:
 
         Then, it can call turtle.listen()
         '''
+        # I CANT UNDERSTAND WHAT THIS METHOOD IS SUPPOSED TO DO AND SIVAN SAID IT WORKS WITHOUT IT SO...
         pass
 
     def msg_received(self,msg):
@@ -198,19 +221,40 @@ class View:
         :param msg: a string containing the message received
                     - this should be displayed on the screen
         '''
+
+        
         print(msg) #Debug - print message
         show_this_msg=self.partner_name+' says:\r'+ msg
         #Add the message to the queue either using insert (to put at the beginning)
         #or append (to put at the end).
-        #
+        self.msg_queue.append(show_this_msg)
         #Then, call the display_msg method to update the display
+        self.display_msg()
 
+        
     def display_msg(self):
         '''
         This method should update the messages displayed in the screen.
         You can get the messages you want from self.msg_queue
         '''
-        pass
+        self.mqd0.clear()
+        self.mqd1.clear()
+        self.mqd0.write(self.username +':\r' + self.msg_queue[-1])
+        self.mqd1.write(self.msg_queue[-2])
+        
+##        if len(self.msg_queue) == 0:
+##            self.msg1.write(self.msg_queue)
+##        elif len(self.msg_queue) > 1:
+##            self.msg1.clear()
+##            self.msg2.clear()
+##            self.msg1.write(self.msg_queue[-1])
+##            self.msg2.write(self.msg_queue[-2])
+##        elif len(self.msg_queue) == 1:
+##            self.msg1.clear()
+##            self.msg1.write(self.msg_queue[-1])
+
+        #self.writer.write(msg_queue)
+        
 
     def get_client(self):
         return self.my_client
