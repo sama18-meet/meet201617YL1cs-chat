@@ -6,7 +6,25 @@ from turtle_chat_widgets import TextInput , Button
 
 
 class TextBox(TextInput):
+    def __init__(self):
+        super(TextBox,self).__init__(pos=(0,-170),height=50)
     def draw_box(self):
+
+
+        bigbox= turtle.clone()
+        bigbox.penup()
+        bigbox.goto(110,-250)
+        bigbox.pendown()
+        bigbox.color("black", "green")
+        bigbox.begin_fill()
+        bigbox.goto(110,200)
+        bigbox.goto(-110,200)
+        bigbox.goto(-110,-250)
+        bigbox.goto(110,-250)
+        bigbox.end_fill()
+        bigbox.penup()
+
+        
         box = turtle.clone()
         #box.hideturtle()
         box.penup()
@@ -50,33 +68,23 @@ class TextBox(TextInput):
 #Make a class called SendButton, which will be a subclass of Button.
 class SendButton(Button):
     def __init__(self,my_view):
-        super(SendButton,self).__init__()
+        super(SendButton,self).__init__(pos=(0,-220))
         self.my_view = my_view
+        sbword = turtle.clone()
+        self.sbword = sbword
+        sbword.pen(pencolor="yellow")
+        sbword.penup()
+        sbword.goto(0,-232)
+        sbword.pendown()
+        sbword.write("SEND", align= "center", font=("Ultra", 16, "bold"))
+
     def fun(self,x=None,y=None):
  
 
         
         self.my_view.send_msg()
       
-        
-
-    
-#Button is an abstract class with one abstract method: fun.
-#fun gets called whenever the button is clicked.  It's jobs will be to
-#
-# 1. send a message to the other chat participant - to do this,
-#    you will need to call the send method of your Client instance
-# 2. update the messages that you see on the screen
-#
-#HINT: You may want to override the __init__ method so that it takes one additional
-#      input: view.  This will be an instance of the View class you will make next
-#      That class will have methods inside of it to help
-#      you send messages and update message displays.
-#####################################################################################
-#####################################################################################
-
-
-##################################################################
+ ##################################################################
 #                             View                               #
 ##################################################################
 #Make a new class called View.  It does not need to have a parent
@@ -91,7 +99,7 @@ class View:
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
-    def __init__(self,username='Me',partner_name='Partner'):
+    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.jpg"):
         '''
         :param username: the name of this chat user
         :param partner_name: the name of the user you are chatting with
@@ -101,6 +109,7 @@ class View:
         ###
         self.username = username
         self.partner_name = partner_name
+        self.partner_pic = partner_pic
         ###
         #Make a new client object and store it in this instance of View
         #(i.e. self).  The name of the instance should be my_client
@@ -138,29 +147,30 @@ class View:
 ##            self.msg_queue_displayed = [self.msg_queue[-1], self.msg_queue[2]]
         mqd0 = turtle.clone()
         mqd1 = turtle.clone()
+        mqd2 = turtle.clone()
+        mqd3 = turtle.clone()
+        mqd4 = turtle.clone()
+
         self.mqd0 = mqd0
         self.mqd1 = mqd1
+        self.mqd2 = mqd2
+        self.mqd3 = mqd3
         self.mqd0.penup()
         self.mqd1.penup()
-        self.mqd0.goto(-100,50)
-        self.mqd1.goto(-100,150)
+        self.mqd2.penup()
+        self.mqd3.penup()
+        self.mqd0.goto(-100,-70)
+        self.mqd1.goto(-100,0)
+        self.mqd2.goto(-100,70)
+        self.mqd3.goto(-100,140)
         self.mqd0.pendown()
         self.mqd1.pendown()
+        self.mqd2.pendown()
+        self.mqd3.pendown()
+        
             
             
 
-##            
-##        msg1 = turtle.clone()
-##        msg2 = turtle.clone()
-##        msg3 = turtle.clone()
-##        msg4 = turtle.clone()
-##        msg5 = turtle.clone()
-##        self.msg1 = msg1
-##        self.msg2 = msg2
-##        self.msg3 = msg3
-##        self.msg4 = msg4
-##        self.msg5 = msg5
-##        ###
         #Create a TextBox instance and a SendButton instance and
         #Store them inside of this instance
         ###
@@ -172,8 +182,22 @@ class View:
         ###
         turtle.listen()
         
+        turtle.Screen().bgpic("meet1.jpg")
 
+        partner = turtle.clone()
+        partner.penup()
+        partner.goto(-50,220)
+        partner.pendown()
+        partner.write(self.partner_name, align= "left", font=("Ultra", 20, "bold"))
+        
 
+        pic = turtle.clone()
+        pic.penup()
+        pic.goto(-90,210)
+        pic.color("black", "green")
+        pic.begin_fill()
+        pic.circle(30)
+        pic.end_fill()
 
         
     def send_msg(self):
@@ -239,21 +263,15 @@ class View:
         '''
         self.mqd0.clear()
         self.mqd1.clear()
-        self.mqd0.write(self.username +':\r' + self.msg_queue[-1])
+        self.mqd2.clear()
+        self.mqd3.clear()
+        self.mqd0.write(self.msg_queue[-1])
         self.mqd1.write(self.msg_queue[-2])
-        
-##        if len(self.msg_queue) == 0:
-##            self.msg1.write(self.msg_queue)
-##        elif len(self.msg_queue) > 1:
-##            self.msg1.clear()
-##            self.msg2.clear()
-##            self.msg1.write(self.msg_queue[-1])
-##            self.msg2.write(self.msg_queue[-2])
-##        elif len(self.msg_queue) == 1:
-##            self.msg1.clear()
-##            self.msg1.write(self.msg_queue[-1])
+        self.mqd2.write(self.msg_queue[-3])
+        self.mqd3.write(self.msg_queue[-4])
 
-        #self.writer.write(msg_queue)
+        
+
         
 
     def get_client(self):
