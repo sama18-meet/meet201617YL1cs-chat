@@ -1,4 +1,11 @@
+##QUESTIONS FOR TED
+##WHY IS THE FIRST MESSAGE THE ONLY ONE THAT GETS SENT?
+##WHY CAN'T I IMPORT PICTURES?
+##HOW CAN I FIX THE TIME?
 
+
+
+import time
 import turtle
 turtle.hideturtle()
 from turtle_chat_client import Client
@@ -15,7 +22,7 @@ class TextBox(TextInput):
         bigbox.penup()
         bigbox.goto(110,-250)
         bigbox.pendown()
-        bigbox.color("black", "green")
+        bigbox.color("black", "red")
         bigbox.begin_fill()
         bigbox.goto(110,200)
         bigbox.goto(-110,200)
@@ -26,6 +33,7 @@ class TextBox(TextInput):
 
         
         box = turtle.clone()
+        
         #box.hideturtle()
         box.penup()
         box.goto(self.pos[0]-self.width/2,self.pos[1]-self.height/2)
@@ -36,7 +44,7 @@ class TextBox(TextInput):
         box.goto(self.pos[0]-self.width/2,self.pos[1]-self.height/2)
         box.penup()
 
-     
+
 
 
     def write_msg(self):
@@ -100,10 +108,7 @@ class View:
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
     def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.jpg"):
-        '''
-        :param username: the name of this chat user
-        :param partner_name: the name of the user you are chatting with
-        '''
+        
         ###
         #Store the username and partner_name into the instance.
         ###
@@ -182,7 +187,7 @@ class View:
         ###
         turtle.listen()
         
-        turtle.Screen().bgpic("meet1.jpg")
+        turtle.Screen().bgcolor("yellow")
 
         partner = turtle.clone()
         partner.penup()
@@ -194,7 +199,7 @@ class View:
         pic = turtle.clone()
         pic.penup()
         pic.goto(-90,210)
-        pic.color("black", "green")
+        pic.color("black", "red")
         pic.begin_fill()
         pic.circle(30)
         pic.end_fill()
