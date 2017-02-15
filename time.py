@@ -12,18 +12,49 @@ def now():
     now = time.localtime(time.time())
     return now
 #updated_now = turtle.ontimer(now,2)   #### THE PROBLEM IS HERE
-
+writer = turtle.clone()
 def show_time():
-    writer = turtle.clone()
+    fontsize = 80
+    global writer
     writer.hideturtle()
     writer.penup()
-    writer.goto(80,270)
+    writer.goto(0,0)
     writer.pendown()
-    writer.write((updated_now[3], ':' , updated_now[4]),align = 'center',font=("Ultra", 10, "bold"))
+    writer.clear()
+    writer.write((now()[3] ,":",  now()[4]),align = 'center',font=("Ultra", 80, "bold"))
+
+    turtle.ontimer(show_time,1000)
+
+show_time()
+turtle.mainloop()
 
 
-turtle.ontimer(show_time,2)
 
-
-
-
+##class Clock():
+##    def __init__(self,writer):
+##        writer = turtle.clone()
+##        self.writer = writer
+##        
+##    def now():
+##        now = time.localtime(time.time())
+##        return now
+##
+##    def show_time():
+##        
+##        self.writer.hideturtle()
+##        self.writer.penup()
+##        self.writer.goto(0,0)
+##        self.writer.pendown()
+##        self.writer.clear()
+##        self.writer.write((now()[3] ,":",  now()[4]),align = 'center',font=("Ultra", 80, "bold"))
+##
+##        turtle.ontimer(show_time,1000)
+##
+##    show_time()
+##    turtle.mainloop()
+##
+##
+##Clock()
+##
+##
+##
