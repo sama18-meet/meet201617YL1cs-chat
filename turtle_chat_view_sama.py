@@ -105,7 +105,7 @@ class View:
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
-    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.jpg"):
+    def __init__(self,username='Me',partner_name='Sama',partner_pic="Juna.jpg"):
         
         ###
         #Store the username and partner_name into the instance.
@@ -187,7 +187,7 @@ class View:
         ###
         turtle.listen()
         
-        turtle.Screen().bgcolor("blue")
+        turtle.Screen().bgcolor("yellow")
 
         partner = turtle.clone()
         partner.penup()
@@ -199,7 +199,7 @@ class View:
         pic = turtle.clone()
         pic.penup()
         pic.goto(-90,210)
-        pic.color("black", "red")
+        pic.color("black", "green")
         pic.begin_fill()
         pic.circle(30)
         pic.end_fill()
@@ -334,5 +334,6 @@ if __name__ == '__main__':
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
     turtle.mainloop()
+
 
 
