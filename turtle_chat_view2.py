@@ -2,6 +2,9 @@
 ##WHY CAN'T I IMPORT PICTURES?
 ##HOW CAN I FIX THE TIME?
 
+### FOR LATER
+### FIX THE SEND BUTTON SO THAT ITS BIG
+### MAKE THE WRITER NOT WRITE OUT OF THE BOX
 
 
 import time
@@ -51,7 +54,10 @@ class TextBox(TextInput):
         self.writer.pendown()
         self.writer.clear()
         self.writer.write(self.new_msg)
-        
+##        if len(self.new_msg) > 30:
+##            self.writer.write(self.new_msg, '\r')
+##            
+##        
         
 
 #
@@ -186,8 +192,9 @@ class View:
         #and any other remaining setup functions you have invented.
         ###
         turtle.listen()
-        
-        turtle.Screen().bgcolor("blue")
+
+        #turtle.Screen().bgcolor('orange')
+        turtle.Screen().bgpic("meet2.gif")
 
         partner = turtle.clone()
         partner.penup()
