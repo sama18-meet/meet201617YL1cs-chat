@@ -11,7 +11,7 @@ turtle.hideturtle()
 def now():
     now = time.localtime(time.time())
     return now
-#updated_now = turtle.ontimer(now,2)   #### THE PROBLEM IS HERE
+
 writer = turtle.clone()
 def show_time():
     fontsize = 80

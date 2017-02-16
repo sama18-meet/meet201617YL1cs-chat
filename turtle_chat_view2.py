@@ -1,10 +1,10 @@
 ##QUESTIONS FOR TED
-##WHY CAN'T I IMPORT PICTURES?
 ##HOW CAN I FIX THE TIME?
 
 ### FOR LATER
-### FIX THE SEND BUTTON SO THAT ITS BIG
+### MAKE THE DISPLAYED MESSAGES BIGGER
 ### MAKE THE WRITER NOT WRITE OUT OF THE BOX
+
 
 
 import time
@@ -12,6 +12,37 @@ import turtle
 turtle.hideturtle()
 from turtle_chat_client import Client
 from turtle_chat_widgets import TextInput , Button
+
+import time
+import turtle
+
+#time.time = seconds since epoch
+#time.mktime = converts a date/time ... to seconds since epoch
+
+
+turtle.hideturtle()
+
+
+def now():
+    now = time.localtime(time.time())
+    return now
+
+writer = turtle.clone()
+def show_time():
+    global writer
+    writer.hideturtle()
+    writer.penup()
+    writer.goto(90,250)
+    writer.pendown()
+    writer.clear()
+    writer.pencolor("white")
+    writer.write((now()[3],":",now()[4]),align = 'center',font=("Ultra", 15, "bold"))
+
+    turtle.ontimer(show_time,1000)
+
+show_time()
+
+
 
 
 class TextBox(TextInput):
@@ -111,7 +142,7 @@ class View:
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
-    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.jpg"):
+    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.gif"):
         
         ###
         #Store the username and partner_name into the instance.
@@ -119,6 +150,7 @@ class View:
         self.username = username
         self.partner_name = partner_name
         self.partner_pic = partner_pic
+        
         ###
         #Make a new client object and store it in this instance of View
         #(i.e. self).  The name of the instance should be my_client
@@ -194,22 +226,24 @@ class View:
         turtle.listen()
 
         #turtle.Screen().bgcolor('orange')
-        turtle.Screen().bgpic("meet2.gif")
+        turtle.Screen().bgpic("/home/student/sama/meet201617YL1cs-chat/meet2.GIF")
 
         partner = turtle.clone()
         partner.penup()
         partner.goto(-50,220)
         partner.pendown()
+        partner.color("yellow")
         partner.write(self.partner_name, align= "left", font=("Ultra", 20, "bold"))
-        
 
+
+        
+        turtle.register_shape(partner_pic)
         pic = turtle.clone()
+        pic.shape(partner_pic)
         pic.penup()
-        pic.goto(-90,210)
-        pic.color("black", "red")
-        pic.begin_fill()
-        pic.circle(30)
-        pic.end_fill()
+        pic.goto(-90,240)
+        pic.stamp()
+        
 
         
     def send_msg(self):
@@ -281,23 +315,23 @@ class View:
         if len(self.msg_queue) == 1:
             
             self.mqd0.clear()
-            self.mqd0.write(self.msg_queue[-1])
+            self.mqd0.write(self.msg_queue[-1],font=("Ultra", 10, "bold"))
 
         if len(self.msg_queue) == 2:
             
             self.mqd0.clear()
             self.mqd1.clear()
-            self.mqd0.write(self.msg_queue[-1])
-            self.mqd1.write(self.msg_queue[-2])
+            self.mqd0.write(self.msg_queue[-1],font=("Ultra", 10, "bold"))
+            self.mqd1.write(self.msg_queue[-2],font=("Ultra", 10, "bold"))
 
         if len(self.msg_queue) == 3:
 
             self.mqd0.clear()
             self.mqd1.clear()
             self.mqd2.clear()
-            self.mqd0.write(self.msg_queue[-1])
-            self.mqd1.write(self.msg_queue[-2])
-            self.mqd2.write(self.msg_queue[-3])
+            self.mqd0.write(self.msg_queue[-1],font=("Ultra", 10, "bold"))
+            self.mqd1.write(self.msg_queue[-2],font=("Ultra", 10, "bold"))
+            self.mqd2.write(self.msg_queue[-3],font=("Ultra", 10, "bold"))
             
             
         if len(self.msg_queue) >= 4:
@@ -306,10 +340,10 @@ class View:
             self.mqd1.clear()
             self.mqd2.clear()
             self.mqd3.clear()
-            self.mqd0.write(self.msg_queue[-1])
-            self.mqd1.write(self.msg_queue[-2])
-            self.mqd2.write(self.msg_queue[-3])
-            self.mqd3.write(self.msg_queue[-4])
+            self.mqd0.write(self.msg_queue[-1],font=("Ultra", 10, "bold"))
+            self.mqd1.write(self.msg_queue[-2],font=("Ultra", 10, "bold"))
+            self.mqd2.write(self.msg_queue[-3],font=("Ultra", 10, "bold"))
+            self.mqd3.write(self.msg_queue[-4],font=("Ultra", 10, "bold"))
 
         
 
@@ -341,5 +375,6 @@ if __name__ == '__main__':
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
     turtle.mainloop()
+
 
 
