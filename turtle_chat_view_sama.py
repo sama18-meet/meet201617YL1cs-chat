@@ -10,7 +10,8 @@ turtle.hideturtle()
 from turtle_chat_client import Client
 from turtle_chat_widgets import TextInput , Button
 
-
+color1= 'white'
+color2= 'navy'
 class TextBox(TextInput):
     def __init__(self):
         super(TextBox,self).__init__(pos=(0,-170),height=50)
@@ -21,7 +22,7 @@ class TextBox(TextInput):
         bigbox.penup()
         bigbox.goto(110,-250)
         bigbox.pendown()
-        bigbox.color("black", "red")
+        bigbox.color("black", color2)
         bigbox.begin_fill()
         bigbox.goto(110,200)
         bigbox.goto(-110,200)
@@ -79,7 +80,7 @@ class SendButton(Button):
         self.my_view = my_view
         sbword = turtle.clone()
         self.sbword = sbword
-        sbword.pen(pencolor="yellow")
+        sbword.pen(pencolor=color1)
         sbword.penup()
         sbword.goto(0,-232)
         sbword.pendown()
@@ -105,7 +106,7 @@ class View:
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
-    def __init__(self,username='Me',partner_name='Sama',partner_pic="Juna.jpg"):
+    def __init__(self,username='Me',partner_name='Sama',partner_pic="profile.gif"):
         
         ###
         #Store the username and partner_name into the instance.
@@ -187,22 +188,32 @@ class View:
         ###
         turtle.listen()
         
-        turtle.Screen().bgcolor("yellow")
+        turtle.Screen().bgpic("meet4.gif")
 
         partner = turtle.clone()
         partner.penup()
         partner.goto(-50,220)
         partner.pendown()
+        partner.pencolor(color1)
         partner.write(self.partner_name, align= "left", font=("Ultra", 20, "bold"))
-        
 
+
+        
+        turtle.register_shape(partner_pic)
         pic = turtle.clone()
+        pic.shape(partner_pic)
         pic.penup()
-        pic.goto(-90,210)
-        pic.color("black", "green")
-        pic.begin_fill()
-        pic.circle(30)
-        pic.end_fill()
+        pic.goto(-90,240)
+        pic.stamp()
+        
+##
+##        pic = turtle.clone()
+##        pic.penup()
+##        pic.goto(-90,210)
+##        pic.color("black", "green")
+##        pic.begin_fill()
+##        pic.circle(30)
+##        pic.end_fill()
 
         
     def send_msg(self):

@@ -13,16 +13,8 @@ turtle.hideturtle()
 from turtle_chat_client import Client
 from turtle_chat_widgets import TextInput , Button
 
-import time
-import turtle
-
-#time.time = seconds since epoch
-#time.mktime = converts a date/time ... to seconds since epoch
-
-
-turtle.hideturtle()
-
-
+wordcolor= 'white'
+bgcolor = 'navy'
 def now():
     now = time.localtime(time.time())
     return now
@@ -35,7 +27,7 @@ def show_time():
     writer.goto(90,250)
     writer.pendown()
     writer.clear()
-    writer.pencolor("white")
+    writer.pencolor(wordcolor)
     writer.write((now()[3],":",now()[4]),align = 'center',font=("Ultra", 15, "bold"))
 
     turtle.ontimer(show_time,1000)
@@ -55,7 +47,7 @@ class TextBox(TextInput):
         bigbox.penup()
         bigbox.goto(110,-250)
         bigbox.pendown()
-        bigbox.color("black", "red")
+        bigbox.color("black", bgcolor)
         bigbox.begin_fill()
         bigbox.goto(110,200)
         bigbox.goto(-110,200)
@@ -116,7 +108,7 @@ class SendButton(Button):
         self.my_view = my_view
         sbword = turtle.clone()
         self.sbword = sbword
-        sbword.pen(pencolor="yellow")
+        sbword.pen(pencolor=wordcolor)
         sbword.penup()
         sbword.goto(0,-232)
         sbword.pendown()
@@ -142,7 +134,7 @@ class View:
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
-    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.gif"):
+    def __init__(self,username='Me',partner_name='Juna',partner_pic="Juna.gif",bg_pic="/home/student/sama/meet201617YL1cs-chat/meet2.GIF"):
         
         ###
         #Store the username and partner_name into the instance.
@@ -226,13 +218,13 @@ class View:
         turtle.listen()
 
         #turtle.Screen().bgcolor('orange')
-        turtle.Screen().bgpic("/home/student/sama/meet201617YL1cs-chat/meet2.GIF")
+        turtle.Screen().bgpic(bg_pic)
 
         partner = turtle.clone()
         partner.penup()
         partner.goto(-50,220)
         partner.pendown()
-        partner.color("yellow")
+        partner.color(wordcolor)
         partner.write(self.partner_name, align= "left", font=("Ultra", 20, "bold"))
 
 
